@@ -1,12 +1,15 @@
-import mechanize, random, time
+import mechanize
+import random
+import time
 import http.cookiejar as cookielib
 
+
 class anonBrowser(mechanize.Browser):
-    def __init__(self, proxies = [],user_agents = []):
+    def __init__(self, proxies=[], user_agents=[]):
         mechanize.Browser.__init__(self)
         self.set_handle_robots(False)
         self.proxies = proxies
-        self.user_agents = user_agents + ['Mozilla/4.0 ', 'FireFox/6.01','ExactSearch', 'Nokia7110/1.0']
+        self.user_agents = user_agents + ['Mozilla/4.0 ', 'FireFox/6.01', 'ExactSearch', 'Nokia7110/1.0']
         self.cookes_jar = cookielib.LWPCookieJar()
         self.set_cookiejar(self.cookie_jar)
         self.anonymize()
@@ -24,10 +27,9 @@ class anonBrowser(mechanize.Browser):
             index = random.randrange(0, len(self.proxies))
             self.set_proxies({'http': self.proxies[index]})
 
-    def anonymize(self, sleep = False):
+    def anonymize(self, sleep=False):
         self.clear_cookies()
         self.change_user_agent()
         self.change_proxy()
         if sleep:
             time.sleep(60)
-
