@@ -1,5 +1,6 @@
 import mechanize
-import cookielib
+#from python2 to python3 it was renamed
+import http.cookiejar as cookielib
 
 def printCookies(url):
     browser = mechanize.Browser()
